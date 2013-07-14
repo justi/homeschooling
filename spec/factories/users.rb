@@ -6,7 +6,7 @@ FactoryGirl.define do
     country
     latitude "52.417"
     longitude "16.883"
-    sequence(:email) { |n| "user_#{n}@railspeople.com" }
+    sequence(:email) { |n| "user_#{n}@homeschooling.com" }
     password "foobar12"
     password_confirmation "foobar12"
     change_password_needed false
@@ -47,7 +47,7 @@ FactoryGirl.define do
       factory :user_twitter_valid_profile do |u|
         latitude "52.417"
         longitude "16.883"
-        sequence(:email) { |n| "user_#{n}@railspeople.com" }
+        sequence(:email) { |n| "user_#{n}@homeschooling.com" }
         country_id 1
       end
     end
@@ -72,7 +72,7 @@ FactoryGirl.define do
         sequence(:last_name) { |n| "User#{n}_last_name" }
         latitude "52.417"
         longitude "16.883"
-        sequence(:email) { |n| "user#{n}@railspeople.com" }
+        sequence(:email) { |n| "user#{n}@homeschooling.com" }
         country_id 1
       end
     end

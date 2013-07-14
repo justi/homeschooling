@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Railspeople::Application.load_tasks
+Homeschooling::Application.load_tasks

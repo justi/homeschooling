@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Railspeople::Application.config.secret_key_base = 'ea4f8d5bd10d418b77cc8b260a104565107f10200cafd2c2622144f894c05a16ec5232f24471d138df64a4b9ced0dd5adc4f2ab28c15993ef016c6ef37c192e5'
+Homeschooling::Application.config.secret_key_base = 'ea4f8d5bd10d418b77cc8b260a104565107f10200cafd2c2622144f894c05a16ec5232f24471d138df64a4b9ced0dd5adc4f2ab28c15993ef016c6ef37c192e5'

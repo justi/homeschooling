@@ -6,7 +6,7 @@ describe "OAuthCredentials" do
       @country = FactoryGirl.create(:country)
 
       visit '/users/sign_up'
-      fill_in "Username", :with => 'prograils_user'
+      fill_in "Username", :with => 'homeschooling_user'
       fill_in "First name", :with => 'firstname'
       fill_in "Last name", :with => 'lastname'
       fill_in "Email", :with => "ruby@rails.com"
