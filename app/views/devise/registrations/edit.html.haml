@@ -1,0 +1,229 @@
+%h2
+  Edit #{resource_name.to_s.humanize}
+.row
+  .span3
+    %ul.nav.nav-list.navigation.affix
+      %li
+        = link_to "Change my username", "#user"
+      %li
+        = link_to "Change my password", "#password"
+      %li
+        = link_to "Change my location", "#map"
+      %li
+        = link_to "My biography", "#biography"
+      %li
+        = link_to "My abilities/skills", "#skills"
+      %li
+        = link_to "Manage blogs", "#blogs"
+      %li
+        = link_to "Social links", "#socials"
+      %li
+        = link_to "Work", "#work"
+      %li
+        = link_to "Privacy settings", "#privacy"
+      %li
+        = link_to "Cancel my account", "#cancel"
+  .span9
+    = nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+      = devise_error_messages!
+      .span8#sections_container
+        %section#user.well
+          %div.page-header
+            = "Change my username"
+          %div
+            = f.label :username
+            = f.text_field :username
+          %div
+            = f.label :first_name
+            = f.text_field :first_name
+          %div
+            = f.label :last_name
+            = f.text_field :last_name
+          %div
+            = f.label :email
+            = f.email_field :email
+          %div
+            =f.label :avatar
+            =f.file_field :avatar
+          .act_buttons
+            = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'username_sub'
+            = link_to "Back", :back
+
+        =# password
+        %section#password.well
+          %div.page-header
+            - if resource.change_password_needed?
+              = "Set my password"
+            - else
+              = "Change my password"
+          %div
+            = f.label :password
+            = f.password_field :password, :autocomplete => 'off'
+            %i (leave blank if you don't want to change it)
+            %br/
+          %div
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation
+          %div{:style => "display:#{resource.change_password_needed? ? "none" : "inline"}"}
+            = f.label :current_password
+            = f.password_field :current_password
+            %i (we need your current password to confirm your changes)
+          .act_buttons
+            = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'password_sub'
+            = link_to "Back", :back
+
+        #user_id{"data-url" => resource.id}
+
+        %section#map.well
+          %div.page-header
+            = "Change my location"
+          %div
+            = f.label :country_id
+            = f.select :country_id, Country.order('name ASC').map { |c| [c.printable_name, c.id] }, :prompt => true
+          #new_user_map
+            #edit_map
+          %div
+            = f.text_field :latitude, :style => "display: none;"
+          %div
+            = f.text_field :longitude, :style => "display: none;"
+          %div
+            = f.text_field :zoom, :style => "display: none;"
+          %br
+          .act_buttons
+            = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'map_sub'
+            = link_to "Back", :back
+
+        =# skills
+        %section#skills.well
+          %div.page-header
+            = "Skills"
+          %div
+            = f.label :tag_names, "Tags"
+            = f.text_field :tag_names, :placeholder => "rails computers programming", :class => "input-xxlarge"
+          .act_buttons
+            = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'skills_sub'
+            = link_to "Back", :back
+
+        =# biography
+        %section#biography.well
+          %div.page-header
+            = "Biography"
+          %div
+            = f.label :bio
+            = f.text_area :bio
+          .act_buttons
+            = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'biography_sub'
+            = link_to "Back", :back
+
+        =# blogs
+        %section#blogs.well
+          %div.page-header
+            = "Manage my blogs"
+          / = simple_nested_form_for resource do |f|
+          /   = f.fields_for :blogs
+          /   = f.link_to_add t("add_next"), :blogs, :class => 'btn btn-small btn-primary'
+          = f.fields_for :blogs
+          / do |b|
+          /  = b.text_field :url, :placeholder => "Url", :class => "input-xxlarge"
+          /  = b.link_to_remove "Remove", :class => 'btn btn-small btn-danger'
+          /  %br
+          /  %br
+          = f.link_to_add "Add next", :blogs, :class => 'btn btn-small btn-primary'
+          .act_buttons
+            = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'blogs_sub'
+            = link_to "Back", :back
+
+        =# socials
+        %section#socials.well
+          %div.page-header
+            = "Add social profiles"
+
+          %div
+            = f.label :gtalk
+            = f.text_field :gtalk, :placeholder => "Nick"
+          %div
+            = f.label :skype
+            = f.text_field :skype, :placeholder => "Nick"
+          %div
+            = f.label :jabber
+            = f.text_field :jabber, :placeholder => "Nick"
+          %div
+            = f.label :facebook
+            = f.text_field :facebook, disabled: true, hint: 'You can merge with facebook account by clicking button on the right.'
+            = link_to image_tag("icons/facebook_32.png"),user_omniauth_authorize_path(:facebook), :id => "merge_account_with_facebook", class: "social-btn #{"activated" if @user.has_account_merged_with?("facebook")}"
+          %div
+            = f.label :github
+            = f.text_field :github, disabled: true, hint: 'You can merge with facebook account by clicking button on the right.'
+            = link_to image_tag("icons/github_32.png"),user_omniauth_authorize_path(:github), :id => "merge_account_with_github", class: "social-btn #{"activated" if @user.has_account_merged_with?("github")}"
+          %div
+            = f.label :twitter
+            = f.text_field :twitter, disabled: true, hint: 'You can merge with facebook account by clicking button on the right.'
+            = link_to image_tag("icons/twitter_32.png"),user_omniauth_authorize_path(:twitter), :id => "merge_account_with_twitter", class: "social-btn #{"activated" if @user.has_account_merged_with?("twitter")}"
+
+          %br
+          Services adress
+          %br
+          / = simple_nested_form_for resource do |f|
+          /   = f.fields_for :socials
+          /   = f.link_to_add "Add service", :socials, :class => 'btn btn-small btn-primary'
+          = f.fields_for :socials do |s|
+            = s.text_field :url, :placeholder => "example: http://stackoverflow.com/users/...", :class => "input-xxlarge"
+            = s.link_to_remove "Remove", :class => 'btn btn-small btn-danger'
+            %br
+            %br
+          = f.link_to_add "Add service", :socials, :class => 'btn btn-small btn-primary'
+
+          .act_buttons
+            = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'social_sub'
+            = link_to "Back", :back
+
+        =# work
+        %section#work.well
+          %div.page-header
+            = "Manage My work settings"
+          Looking for work?
+          %div
+            = f.select :looking_for_work, {"I'm not looking for work at the moment" => 0, "I'm looking for freelance work" => 1, "I'm looking for full-time work" => 2}
+          .act_buttons
+            = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'work_sub'
+            = link_to "Back", :back
+
+        =# privacy settings
+        %section#privacy.well
+          %div.page-header
+            = "Manage My privacy settings"
+          %p
+            %p Search visibility
+            = f.radio_button :search_visibility, true
+            Allow search engines to index my profile page (recommended)
+            %br/
+            = f.radio_button :search_visibility, false
+            Don't allow search engines to index my profile page
+          %p
+            %p Email privacy
+            = f.radio_button :email_privacy, 2
+            Anyone can see my email address
+            %br/
+            = f.radio_button :email_privacy, 1
+            Only logged-in users can see my email address
+            %br/
+            = f.radio_button :email_privacy, 0
+            Noone can ever see my email address
+          %p
+            %p IM privacy
+            = f.radio_button :im_privacy, false
+            Only logged-in users can see my IM details
+            %br/
+            = f.radio_button :im_privacy, true
+            Anyone can see my IM details
+
+          .act_buttons
+            = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'privacy_sub'
+            = link_to "Back", :back
+
+        =# cancel
+        %section#cancel.well
+          %div.page-header
+            = "Cancel my account"
+          %p
+            Unhappy? #{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, :method => :delete, :id => "destroy_link"}.

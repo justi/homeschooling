@@ -1,0 +1,41 @@
+- if params[:selected]
+  = image_tag("famfamfam_flags/#{@selected_country.iso.downcase}.png", :size => "100x100")
+  %span.selected-country-printable-name 
+    = @selected_country.printable_name 
+  = pluralize @selected_country.users_count, "person"
+  = render 'users/profile'
+  %br/
+  %br/
+- else
+  .row-fluid
+    .pull-left.span1
+      = image_tag('rails.png')
+    .pull-left
+      %h1= 'Rails People'
+    = render 'users/profile'
+  %div
+    Discover users of the 
+    = link_to "Ruby on Rails Web", "http://rubyonrails.org/", :target => "_blank"
+    framework near you
+    %br 
+
+/ = gmaps4rails(@json)
+
+- if params[:selected]
+  = gmaps({"map_options" => {"auto_adjust" => false, "zoom" => 5, "center_latitude" => @selected_country.lat, "center_longitude" => @selected_country.lng }, "markers" => {"data" => @json, :options => { :do_clustering => true, :clusterer_maxZoom => 8 }}})
+  %br/
+  = will_paginate @people
+  - @people.each do |person|
+    .row.span4
+      = link_to person.username, user_path(person)
+      %br
+      = image_tag("famfamfam_flags/#{person.country.iso.downcase}.png")
+      = person.country.printable_name
+- else
+  = gmaps({"map_options" => {"auto_adjust" => false, "zoom" => 2 }, "markers" => {"data" => @json, :options => { :do_clustering => true, :clusterer_maxZoom => 8 }}})
+  %br/
+  - @countries.each do |country|
+    .row.span4
+      = image_tag("famfamfam_flags/#{country.iso.downcase}.png")
+      = link_to country.printable_name, home_index_path(:selected => country.printable_name)
+      = pluralize country.users_count, 'person'

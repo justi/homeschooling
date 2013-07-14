@@ -1,0 +1,8 @@
+== RailsPeople
+
+Rails People lists many developers from around the world, in a lot of different countries.
+The aim of this project is to help Rails developers find people near them with simmilar interests and create some user groups.
+
+Country data and location come from link:http://www.ohadpr.com/2010/04/countries-approximate-lat-lon-and-iso-3166-1-alpha-2/index.html, the maps were powered by link:http://developers.google.com/maps/. Country flags and icons are by link:http://famfamfam.com/lab/icons/.
+
+Autors: Rafał Trojanowski, Justyna Wojtczak and Jarosław Jeleniewicz.
