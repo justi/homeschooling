@@ -234,6 +234,11 @@ GEM
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.1)
+    rails_stdout_logging (0.0.1)
     rake (10.0.3)
     rdoc (3.12.2)
       json (~> 1.4)
@@ -330,6 +335,7 @@ DEPENDENCIES
   paperclip (~> 3.0)
   pg
   rails!
+  rails_12factor
   rest-client
   rspec-rails (~> 2.12.2)
   sass-rails!
