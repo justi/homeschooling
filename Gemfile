@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.0.0"
 
 gem 'devise', :git => "https://github.com/plataformatec/devise.git", :branch => "rails4"
 #gem 'devise',    github: 'versioncontrol/devise'
@@ -27,6 +28,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
 gem 'rest-client'
+gem 'pg' # for heroku deployment
 
 # Gems used only for assets and not required
 # in production environments by default.

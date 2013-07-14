@@ -1,7 +1,7 @@
 - if params[:selected]
   = image_tag("famfamfam_flags/#{@selected_country.iso.downcase}.png", :size => "100x100")
-  %span.selected-country-printable-name 
-    = @selected_country.printable_name 
+  %span.selected-country-printable-name
+    = @selected_country.printable_name
   = pluralize @selected_country.users_count, "person"
   = render 'users/profile'
   %br/
@@ -11,13 +11,13 @@
     .pull-left.span1
       = image_tag('rails.png')
     .pull-left
-      %h1= 'Rails People'
+      %h1= 'Homeschooling'
     = render 'users/profile'
   %div
-    Discover users of the 
+    Discover users of the
     = link_to "Ruby on Rails Web", "http://rubyonrails.org/", :target => "_blank"
     framework near you
-    %br 
+    %br
 
 / = gmaps4rails(@json)
 
