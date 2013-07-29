@@ -188,10 +188,6 @@ class User < ActiveRecord::Base
           u.update_all email: data.email if no_email_filled? && data.email.present?
 
           u.update_all facebook: data.username if self.facebook.blank? && data.username.present?
-        when "twitter"
-          u.update_all twitter: data.screen_name if self.twitter.blank? && data.screen_name.present?
-        when "github"
-          u.update_all github: data.login if self.github.blank? && data.login.present?
       end
     end
   end
@@ -200,10 +196,6 @@ class User < ActiveRecord::Base
     case provider
       when :facebook
         "http://www.facebook.com/#{self[provider]}"
-      when :twitter
-        "https://twitter.com/#{self[provider]}"
-      when :github
-        "https://github.com/#{self[provider]}"
     end
   end
 
@@ -275,62 +267,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.find_for_twitter_oauth(credentials)
-    credentials.present? ? credentials.user : nil
-  end
-
-  def self.find_or_create_for_twitter_oauth(auth, credentials)
-    if credentials.present?
-      credentials.user
-    else
-      data = auth.extra.raw_info
-      #Create a user with a stub password.
-      uname = self.find_or_create_username_for_twitter(data["screen_name"])
-      first_name, last_name = data["name"].split
-
-      user = User.new(
-        username: "#{uname}",
-        password: Devise.friendly_token[0,20],
-        first_name: first_name || "u_firstname",
-        last_name: last_name || "u_lastname",
-        twitter: data.screen_name,
-        change_password_needed: true)
-      user.email = user.temporary_email
-      user.country_validation = false
-      user.save
-      user
-    end
-  end
-
-  def self.find_for_github_oauth(credentials)
-    credentials.present? ? credentials.user : nil
-  end
-
-  def self.find_or_create_for_github_oauth(auth, credentials)
-    if credentials.present?
-      credentials.user
-    else
-      data = auth.extra.raw_info
-      if data.email.present? && user = User.where(:email => data.email).first
-        user
-      else # Create a user with a stub password.
-        uname = self.find_or_create_username_for_github(data["login"])
-
-        user = User.new(
-          username: "#{uname}",
-          password: Devise.friendly_token[0,20],
-          github: data["login"],
-          change_password_needed: true)
-        user.email = user.temporary_email
-        user.country_validation = false
-        user.first_name_validation = false
-        user.last_name_validation = false
-        user.save
-        user
-      end
-    end
-  end
-
   def self.find_or_create_username_for_facebook(first_n, last_n)
     first_and_last = []
     first_and_last << first_n.capitalize if first_n.present?
@@ -342,24 +278,6 @@ class User < ActiveRecord::Base
       #do nothing
     end
     value
-  end
-
-  def self.find_or_create_username_for_twitter(screen_name)
-    if User.exists?(:username => screen_name)
-      screen_name = self.add_num_chars(screen_name)
-    else
-      #do nothing
-    end
-    screen_name
-  end
-
-  def self.find_or_create_username_for_github(login)
-    if User.exists?(:username => login)
-      login = self.add_num_chars(login)
-    else
-      #do nothing
-    end
-    login
   end
 
   def self.add_num_chars(str)

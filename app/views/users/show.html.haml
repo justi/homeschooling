@@ -66,14 +66,6 @@
               .row-fluid
                 = image_tag 'facebook.png', :size => "40x40"
                 = link_to @user.facebook, @user.profile_url(:facebook)
-            - if @user.github.present?
-              .row-fluid
-                = image_tag 'github.png', :size => "40x40"
-                = link_to @user.github, @user.profile_url(:github)
-            - if @user.twitter.present?
-              .row-fluid
-                = image_tag 'twitter.png', :size => "40x40"
-                = link_to @user.twitter, @user.profile_url(:twitter)
             - if @user.socials.any?
               - @user.socials.in_groups(2, false).each do |group_social|
                 - group_social.each do |social|
@@ -91,10 +83,6 @@
                 - @user.blogs.each do |blog|
                   %li
                     = link_to "#{blog.title}", blog.url
-
-            - if @user.github.present?
-              %h4 Github repos:
-              #github_repos{"data-login" => @user.github}
 
   .span4
     %h3 People near #{@user.first_name}:

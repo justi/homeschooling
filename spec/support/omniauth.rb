@@ -6,13 +6,6 @@ def get_credentials(my_provider)
                             :first_name => "foo",
                             :last_name => "bar",
                             :username => "foo.bar",
-                          },
-              :twitter => {
-                            :name => "foo bar",
-                            :screen_name => "foo_bar",
-                          },
-              :github => {
-                            :login => "foo_bar",
                           }
             }
 end

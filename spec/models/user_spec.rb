@@ -149,14 +149,6 @@ describe User do
       user = FactoryGirl.create(:user)
       user.profile_url(:facebook).should include("http://www.facebook.com/")
     end
-    it "should return twitter profile url" do
-      user = FactoryGirl.create(:user)
-      user.profile_url(:twitter).should include("https://twitter.com/")
-    end
-    it "should return github profile url" do
-      user = FactoryGirl.create(:user)
-      user.profile_url(:github).should include("https://github.com/")
-    end
   end
 
   context "has_account_merged_with? method" do

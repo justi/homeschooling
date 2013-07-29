@@ -62,14 +62,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     do_auth("facebook")
   end
 
-  def twitter
-    do_auth("twitter")
-  end
-
-  def github
-    do_auth("github")
-  end
-
   def country_is_not_set
     @user.latitude.blank? || @user.longitude.blank? || @user.country_id.blank?
   end

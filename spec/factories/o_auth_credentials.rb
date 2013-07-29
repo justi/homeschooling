@@ -7,11 +7,5 @@ FactoryGirl.define do
     factory :facebook_credential do
       provider "facebook"
     end
-    factory :twitter_credential do
-      provider "twitter"
-    end
-    factory :github_credential do
-      provider "github"
-    end
   end
 end

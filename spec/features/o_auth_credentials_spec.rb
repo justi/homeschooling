@@ -37,22 +37,6 @@ describe "OAuthCredentials" do
         click_link "sign_in_with_facebook"
       }.to change { OAuthCredential.count }.by(1)
     end
-
-    it "should increment OAuthCredential count after twitter authorisation" do
-      set_omniauth(:twitter)
-      visit "/"
-      expect {
-        click_link "sign_in_with_twitter"
-      }.to change { OAuthCredential.count }.by(1)
-    end
-
-    it "should increment OAuthCredential count after github authorisation" do
-      set_omniauth(:github)
-      visit "/"
-      expect {
-        click_link "sign_in_with_github"
-      }.to change { OAuthCredential.count }.by(1)
-    end
   end
 
   describe "users/edit form" do
@@ -71,49 +55,14 @@ describe "OAuthCredentials" do
       end
     end
 
-    describe "after merge with twitter" do
-      it 'should add new OAuthCredential record with provider column filled "twitter"' do
-        set_omniauth(:twitter)
-        OAuthCredential.where(user: @user).where(provider: "twitter").any?.should be_false
-        click_link 'merge_account_with_twitter'
-        OAuthCredential.where(user: @user).where(provider: "twitter").any?.should be_true
-      end
-    end
-
-    describe "after merge with github" do
-      it 'should add new OAuthCredential record with provider column filled "github"' do
-        set_omniauth(:github)
-        OAuthCredential.where(user: @user).where(provider: "github").any?.should be_false
-        click_link 'merge_account_with_github'
-        OAuthCredential.where(user: @user).where(provider: "github").any?.should be_true
-      end
-    end
-
-    describe "after merge with github, twitter and facebook" do
-      it 'should increment OAuthCredential count by 3' do
-        expect {
-          set_omniauth(:facebook)
-          click_link 'merge_account_with_facebook'
-          set_omniauth(:github)
-          click_link 'merge_account_with_github'
-          set_omniauth(:twitter)
-          click_link 'merge_account_with_twitter'
-        }.to change { OAuthCredential.count }.by(3)
-      end
-    end
-
     describe "after click cancell account button" do
       it 'should delete all credentials' do
         set_omniauth(:facebook)
         click_link 'merge_account_with_facebook'
-        set_omniauth(:github)
-        click_link 'merge_account_with_github'
-        set_omniauth(:twitter)
-        click_link 'merge_account_with_twitter'
 
         expect {
           click_on "destroy_link"
-        }.to change { OAuthCredential.count }.by(-3)
+        }.to change { OAuthCredential.count }.by(-1)
 
         OAuthCredential.where(user: @user).any?.should be_false
       end

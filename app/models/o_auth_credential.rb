@@ -2,7 +2,7 @@ class OAuthCredential < ActiveRecord::Base
   serialize :params
 
   ## TYPES
-  PROVIDERS = %w( facebook twitter github )
+  PROVIDERS = %w( facebook )
 
   ## ASSOCIATIONS
   belongs_to :user
