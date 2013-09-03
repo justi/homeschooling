@@ -8,6 +8,7 @@ gem 'arel',      github: 'rails/arel'
 gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
 
 #gem 'ransack'
+gem 'pg'
 gem "paperclip", "~> 3.0"
 gem 'geocoder'
 gem 'will_paginate', '~> 3.0.0'
@@ -22,7 +23,6 @@ gem 'bootstrap-sass', '~> 2.2.2.0'
 gem 'bootswatch-rails'
 gem 'simple_form'
 gem 'nested_form'#, github: 'mlitwiniuk/nested_form', :branch => 'rails4_compatibility'
-gem 'mysql2'
 gem 'curb'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
@@ -30,7 +30,6 @@ gem 'omniauth-github'
 gem 'rest-client'
 
 group :production, :staging do # for heroku deployment
-  gem 'pg'
   gem 'rails_12factor'
 end
 
@@ -51,9 +50,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem "factory_girl_rails", "~> 4.0"
-
 group :development, :test do
+  gem "factory_girl_rails", "~> 4.0"
   gem 'rspec-rails', '~> 2.12.2'
   gem 'capybara', '2.0.2'
   gem 'launchy'
