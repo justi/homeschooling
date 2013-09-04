@@ -5,4 +5,4 @@ script:
   - bundle exec rake db:migrate
 before_script:
   - cp config/database.travis.yml config/database.yml
-  - mysql -e 'create database homeschooling_test;'
+  - psql -c 'create database homeschooling_test;' -U postgres

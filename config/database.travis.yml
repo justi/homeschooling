@@ -1,5 +1,5 @@
 test:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   database: homeschooling_test
-  username: root
+  username: postgres
