@@ -31,7 +31,7 @@
       = image_tag("flags/#{person.country.iso.downcase}.png")
       = person.country.printable_name
 - else
-  = gmaps({"map_options" => {"auto_adjust" => false, "zoom" => 3 }, "markers" => {"data" => @json, :options => { :do_clustering => true, :clusterer_maxZoom => 8 }}})
+  = gmaps({"map_options" => {"auto_adjust" => true, "bounds" => '[{"lat": 7, "lng": 1 }, {"lat": 30 , "lng": 30 }]'}, "markers" => {"data" => @json, :options => { :do_clustering => true, :clusterer_maxZoom => 8 }}})
   %br/
   - @countries.each do |country|
     .row.span4
