@@ -91,21 +91,21 @@
   .row-fluid#skills
     .span3
     .span6.well
-      %h4 5. Your skills and interests
+      %h4 5. Anything You can do better, hobbies, interests etc.
       .content
         %div
           = f.label :tag_names, "Tags"
-          = f.text_field :tag_names, :placeholder => "rails computers programming", :class => "input-xxlarge"
+          = f.text_field :tag_names, :placeholder => "painting programming languages", :class => "input-xxlarge"
     .span3
-
-  .row-fluid#work
-    .span3
-    .span6.well
-      %h4 6. Looking for work?
-      .content
-        %div
-          = f.select :looking_for_work, {"I'm not looking for work at the moment" => 0, "I'm looking for freelance work" => 1, "I'm looking for full-time work" => 2}
-    .span3
+  -if false
+    .row-fluid#work
+      .span3
+      .span6.well
+        %h4 6. Looking for work?
+        .content
+          %div
+            = f.select :looking_for_work, {"I'm not looking for work at the moment" => 0, "I'm looking for freelance work" => 1, "I'm looking for full-time work" => 2}
+      .span3
 
   .row-fluid#privacy
     .span3

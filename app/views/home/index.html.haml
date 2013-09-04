@@ -1,5 +1,5 @@
 - if params[:selected]
-  = image_tag("famfamfam_flags/#{@selected_country.iso.downcase}.png", :size => "100x100")
+  = image_tag("flags/#{@selected_country.iso.downcase}.png", :size => "100x100")
   %span.selected-country-printable-name
     = @selected_country.printable_name
   = pluralize @selected_country.users_count, "person"
@@ -8,10 +8,11 @@
   %br/
 - else
   .row-fluid
+    %h1= 'Homeschooling'
     .pull-left.span1
-      = image_tag('rails.png')
+      
     .pull-left
-      %h1= 'Homeschooling'
+    
     = render 'users/profile'
   %div
     Discover homeschooled families near You
@@ -27,13 +28,13 @@
     .row.span4
       = link_to person.username, user_path(person)
       %br
-      = image_tag("famfamfam_flags/#{person.country.iso.downcase}.png")
+      = image_tag("flags/#{person.country.iso.downcase}.png")
       = person.country.printable_name
 - else
   = gmaps({"map_options" => {"auto_adjust" => false, "zoom" => 2 }, "markers" => {"data" => @json, :options => { :do_clustering => true, :clusterer_maxZoom => 8 }}})
   %br/
   - @countries.each do |country|
     .row.span4
-      = image_tag("famfamfam_flags/#{country.iso.downcase}.png")
+      = image_tag("flags/#{country.iso.downcase}.png")
       = link_to country.printable_name, home_index_path(:selected => country.printable_name)
       = pluralize country.users_count, 'person'

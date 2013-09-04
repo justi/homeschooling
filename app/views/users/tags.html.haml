@@ -14,5 +14,5 @@
     = link_to user.username, user_path(user)
     - if user.country.present?
       %br
-      = image_tag("famfamfam_flags/#{user.country.iso.downcase}.png")
+      = image_tag("flags/#{user.country.iso.downcase}.png")
       = user.country.printable_name

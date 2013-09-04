@@ -7,7 +7,7 @@
 %span.profile-username= @user.to_s
 %br
 - if @user.country.present?
-  = image_tag("famfamfam_flags/#{@user.country.iso.downcase}.png")
+  = image_tag("flags/#{@user.country.iso.downcase}.png")
   = @user.country.printable_name
 / %p= gmaps({"map_options" => {"auto_adjust" => false, "zoom" => @user.zoom, "center_latitude" => @user.latitude, "center_longitude" => @user.longitude}, "markers" => {"data" => @json }})
 #user_id{"data-url" => @user.id}
@@ -90,7 +90,7 @@
       %p
         =link_to n.username, user_path(n)
         %br
-        = image_tag("famfamfam_flags/#{n.country.iso.downcase}.png")
+        = image_tag("flags/#{n.country.iso.downcase}.png")
         = n.country.printable_name
         %br
         = pluralize n.distance_from([resource.latitude, resource.longitude]).round(1), "mile"

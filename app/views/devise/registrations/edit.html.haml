@@ -17,8 +17,9 @@
         = link_to "Manage blogs", "#blogs"
       %li
         = link_to "Social links", "#socials"
-      %li
-        = link_to "Work", "#work"
+      -if false
+        %li
+          = link_to "Work", "#work"
       %li
         = link_to "Privacy settings", "#privacy"
       %li
@@ -99,7 +100,7 @@
             = "Skills"
           %div
             = f.label :tag_names, "Tags"
-            = f.text_field :tag_names, :placeholder => "rails computers programming", :class => "input-xxlarge"
+            = f.text_field :tag_names, :placeholder => "painting programming languages", :class => "input-xxlarge"
           .act_buttons
             = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'skills_sub'
             = link_to "Back", :back
@@ -170,15 +171,16 @@
             = link_to "Back", :back
 
         =# work
-        %section#work.well
-          %div.page-header
-            = "Manage My work settings"
-          Looking for work?
-          %div
-            = f.select :looking_for_work, {"I'm not looking for work at the moment" => 0, "I'm looking for freelance work" => 1, "I'm looking for full-time work" => 2}
-          .act_buttons
-            = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'work_sub'
-            = link_to "Back", :back
+        -if false
+          %section#work.well
+            %div.page-header
+              = "Manage My work settings"
+            Looking for work?
+            %div
+              = f.select :looking_for_work, {"I'm not looking for work at the moment" => 0, "I'm looking for freelance work" => 1, "I'm looking for full-time work" => 2}
+            .act_buttons
+              = f.submit "Save", :class => 'btn btn-primary btn-warning', :id => 'work_sub'
+              = link_to "Back", :back
 
         =# privacy settings
         %section#privacy.well
