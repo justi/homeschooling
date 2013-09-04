@@ -1,3 +1,6 @@
+- content_for :header do
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false"
+
 %h2
   Edit #{resource_name.to_s.humanize}
 .row

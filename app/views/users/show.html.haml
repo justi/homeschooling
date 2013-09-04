@@ -1,3 +1,6 @@
+- content_for :header do
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false"
+
 - unless current_user == @user
   = render 'users/profile'
 - if @user.avatar?
