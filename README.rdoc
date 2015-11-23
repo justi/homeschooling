@@ -1,4 +1,8 @@
 == HomeSchooling
 
+Ready app is here: http://secret-coast-9522.herokuapp.com/
 
-Country data and location come from link:http://www.ohadpr.com/2010/04/countries-approximate-lat-lon-and-iso-3166-1-alpha-2/index.html, the maps were powered by link:http://developers.google.com/maps/. Country flags and icons are by link:http://famfamfam.com/lab/icons/.
+Country data and location come from link:http://www.ohadpr.com/2010/04/countries-approximate-lat-lon-and-iso-3166-1-alpha-2/index.html
+the maps were powered by link:http://developers.google.com/maps/
+
+Country flags and icons are by link:http://famfamfam.com/lab/icons/.
